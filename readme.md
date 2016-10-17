@@ -75,3 +75,9 @@ Below you can find an example of what the instructors' final product looks like.
   <img src="screenshots/screenshot3.png" width="250">
   <img src="screenshots/screenshot4.png" width="250">
 </p>
+
+---
+
+## Licensing
+1. All content is licensed under a CC­BY­NC­SA 4.0 license.
+2. All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact [legal@ga.co](mailto:legal@ga.co).

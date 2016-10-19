@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class TodoLists {
     private static TodoLists todoLists = new TodoLists();
     private static LinkedList<String> mNameList;
-    private static HashMap<String, LinkedList<DetailList>> mDetialList;
+    private static HashMap<String, LinkedList<DetailItem>> mDetailList;
 
     public static TodoLists getInstance() {
         return todoLists;
@@ -17,23 +17,27 @@ public class TodoLists {
 
     private TodoLists(){
         mNameList = new LinkedList<>();
-        mDetialList = new HashMap<>();
+        mDetailList = new HashMap<>();
     }
 
     public void createListByName(String name){
         mNameList.add(name);
-        mDetialList.put(name, new LinkedList<DetailList>());
+        mDetailList.put(name, new LinkedList<DetailItem>());
     }
 
     public LinkedList<String> getmNameList() {
         return mNameList;
     }
 
-    public void setmNameList(LinkedList<String> mNameList) {
-        TodoLists.mNameList = mNameList;
+    public LinkedList<DetailItem> getDetailListByName(String name){
+        return mDetailList.get(name);
     }
 
-    public static HashMap<String, LinkedList<DetailList>> getmDetialList() {
-        return mDetialList;
+    public static HashMap<String, LinkedList<DetailItem>> getMap() {
+        return mDetailList;
+    }
+    public void removeDetailListByPosition(int pos){
+        mDetailList.remove(mNameList.get(pos));
+        mNameList.remove(pos);
     }
 }

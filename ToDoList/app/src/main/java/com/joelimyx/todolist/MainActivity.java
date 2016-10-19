@@ -27,30 +27,29 @@ public class MainActivity extends AppCompatActivity {
 
         mTodoLists = TodoLists.getInstance();
 
-        //Test
-        mTodoLists.createListByName("Name");
-
+        //Reference
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mTodoFloatingActionButton = (FloatingActionButton) findViewById(R.id.todo_fab);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        final TodoListAdapter todoListAdapter =new TodoListAdapter(mTodoLists.getmNameList());
+        final TodoListAdapter todoListAdapter =new TodoListAdapter(mTodoLists.getMap(),this);
         mRecyclerView.setAdapter(todoListAdapter);
 
-        //FAB On Click Listener
+        //FAB On Click Listener to create dialog
         mTodoFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Inflate todolist_dialog xml
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-                View view = inflater.inflate(R.layout.todolist_dialog,null);
+                View dialog = inflater.inflate(R.layout.todolist_dialog,null);
 
-                mDialogEdit = (EditText) view.findViewById(R.id.dialog_edit);
+                mDialogEdit = (EditText) dialog.findViewById(R.id.dialog_edit);
 
-                //Inflate the dialog
-                builder.setView(view)
+                //Create the View and show
+                builder.setView(dialog)
                         //Set the positive Button
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override

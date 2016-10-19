@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,9 +15,9 @@ import java.util.List;
  */
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
-    List<TodoLists> mTodoLists = new ArrayList<>();
+    LinkedList<String> mTodoLists = new LinkedList<>();
 
-    public TodoListAdapter(List<TodoLists> todoLists) {
+    public TodoListAdapter(LinkedList<String> todoLists) {
         mTodoLists = todoLists;
     }
 
@@ -26,9 +28,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(TodoListHolder holder, int position) {
-        TodoLists current = mTodoLists.get(position);
+    public void onBindViewHolder(TodoListHolder holder, final int position) {
 
+        holder.mTextView.setText(mTodoLists.get(position));
+        holder.mRemoveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTodoLists.remove(position);
+                notifyItemRemoved(position);
+            }
+        });
     }
 
     @Override

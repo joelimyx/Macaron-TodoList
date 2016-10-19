@@ -1,37 +1,39 @@
 package com.joelimyx.todolist;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
  * Created by Joe on 10/18/16.
  */
 public class TodoLists {
-    private static TodoLists ourInstance = new TodoLists();
-    private static LinkedList<String> mListsName;
-    private static LinkedList<DetailList> mDetailList;
+    private static TodoLists todoLists = new TodoLists();
+    private static LinkedList<String> mNameList;
+    private static HashMap<String, LinkedList<DetailList>> mDetialList;
 
     public static TodoLists getInstance() {
-        return ourInstance;
+        return todoLists;
     }
 
-    public TodoLists() {
-        mListsName = new LinkedList<>();
-        mDetailList = new LinkedList<>();
+    private TodoLists(){
+        mNameList = new LinkedList<>();
+        mDetialList = new HashMap<>();
     }
 
-    public static LinkedList<String> getmListsName() {
-        return mListsName;
+    public void createListByName(String name){
+        mNameList.add(name);
+        mDetialList.put(name, new LinkedList<DetailList>());
     }
 
-    public static void setmListsName(LinkedList<String> mListsName) {
-        TodoLists.mListsName = mListsName;
+    public LinkedList<String> getmNameList() {
+        return mNameList;
     }
 
-    public static LinkedList<DetailList> getmDetailList() {
-        return mDetailList;
+    public void setmNameList(LinkedList<String> mNameList) {
+        TodoLists.mNameList = mNameList;
     }
 
-    public static void setmDetailList(LinkedList<DetailList> mDetailList) {
-        TodoLists.mDetailList = mDetailList;
+    public static HashMap<String, LinkedList<DetailList>> getmDetialList() {
+        return mDetialList;
     }
 }

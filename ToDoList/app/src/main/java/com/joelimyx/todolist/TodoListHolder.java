@@ -1,5 +1,6 @@
 package com.joelimyx.todolist;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +15,12 @@ import butterknife.ButterKnife;
  */
 
 public class TodoListHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.removeImage) ImageView mRemoveImage;
-    @BindView(R.id.lists_text) TextView mTextView;
+    public ImageView mRemoveImage;
+    public TextView mTextView;
 
     public TodoListHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(itemView);
+        mTextView = (TextView) itemView.findViewById(R.id.lists_text);
+        mRemoveImage = (ImageView) itemView.findViewById(R.id.removeImage);
     }
 }

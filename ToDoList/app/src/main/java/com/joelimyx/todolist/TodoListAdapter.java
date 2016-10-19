@@ -4,11 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Joe on 10/18/16.
@@ -23,7 +20,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
 
     @Override
     public TodoListHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lists_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.todolists_item,parent,false);
         return new TodoListHolder(itemView);
     }
 

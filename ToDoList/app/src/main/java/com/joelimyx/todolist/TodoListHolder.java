@@ -18,6 +18,7 @@ public class TodoListHolder extends RecyclerView.ViewHolder {
     public ImageView mRemoveImage;
     public TextView mTextView;
 
+
     public TodoListHolder(View itemView) {
         super(itemView);
         mTextView = (TextView) itemView.findViewById(R.id.lists_text);

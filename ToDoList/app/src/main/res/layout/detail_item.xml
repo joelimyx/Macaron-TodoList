@@ -8,19 +8,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/title"
+        android:id="@+id/title_text"
         android:textSize="20sp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail"
+        android:id="@+id/detail_text"
         android:textSize="16sp"
-        android:layout_below="@id/title"/>
+        android:layout_below="@id/title_text"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_removed"
-        android:layout_alignParentRight="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/detail_remove"/>
 
 </RelativeLayout>

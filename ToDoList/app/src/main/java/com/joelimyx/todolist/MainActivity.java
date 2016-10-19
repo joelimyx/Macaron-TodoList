@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
                 mDialogEdit = (EditText) dialog.findViewById(R.id.dialog_edit);
 
-                //Create the View and show
+                //Create the dialog and show
                 builder.setView(dialog)
-                        //Set the positive Button
+                        //Set the positive Button to add list
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

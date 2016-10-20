@@ -39,7 +39,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final TodoListHolder holder, final int position) {
+    public void onBindViewHolder(final TodoListHolder holder,  int position) {
         final String name = TodoLists.getInstance().getmNameList().get(position);
 
         holder.mTextView.setText(name);
@@ -50,8 +50,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
 
                     //Remove the Detail list if the remove icon is clicked
                     case R.id.removeImage:
-                        final LinkedList<DetailItem> temp = TodoLists.getInstance().removeDetailListByPosition(position);
-                        notifyDataSetChanged();
+                        final LinkedList<DetailItem> temp = TodoLists.getInstance().removeDetailListByPosition(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
 
                         //Snackbar
                         Snackbar snackbar = Snackbar
@@ -62,8 +62,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
                                     @Override
                                     public void onClick(View v) {
                                         Snackbar undo = Snackbar.make(mMain , name+" is restored", Snackbar.LENGTH_LONG);
-                                        TodoLists.getInstance().restoreList(name,temp,position);
-                                        notifyDataSetChanged();
+                                        TodoLists.getInstance().restoreList(name,temp,holder.getAdapterPosition());
+                                        notifyItemInserted(holder.getAdapterPosition());
                                         undo.show();
                                     }
                                 });
@@ -86,6 +86,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
 
     @Override
     public int getItemCount() {
-        return mToDoLists.keySet().size();
+        return TodoLists.getInstance().getmNameList().size();
     }
 }

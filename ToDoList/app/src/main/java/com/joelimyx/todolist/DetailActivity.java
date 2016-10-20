@@ -52,21 +52,24 @@ public class DetailActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mDetailRecycler.setLayoutManager(linearLayoutManager);
 
-        final DetailViewAdapter detailViewAdapter = new DetailViewAdapter(detailList);
+        final DetailViewAdapter detailViewAdapter = new DetailViewAdapter(detailList,DetailActivity.this);
         mDetailRecycler.setAdapter(detailViewAdapter);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Add Task
                 switch (v.getId()) {
                     case R.id.detail_fab:
+
                         //Inflate dialog
                         AlertDialog.Builder dialog = new AlertDialog.Builder(DetailActivity.this);
                         View view = getLayoutInflater().inflate(R.layout.detail_dialog, null);
 
                         //Edit Text Reference
                         final EditText mTitleEdit = (EditText) view.findViewById(R.id.title_edit);
-                        final EditText mDetialEdit = (EditText) view.findViewById(R.id.detail_edit);
+                        final EditText mDetailEdit = (EditText) view.findViewById(R.id.detail_edit);
 
                         //Create dialog and show
                         dialog.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
@@ -74,7 +77,7 @@ public class DetailActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 String title = mTitleEdit.getText().toString();
-                                String detail = mDetialEdit.getText().toString();
+                                String detail = mDetailEdit.getText().toString();
                                 //Check if either field is empty
                                 if (title.isEmpty()) {
                                     Toast.makeText(DetailActivity.this, "Title can't be blank", Toast.LENGTH_SHORT).show();
@@ -90,6 +93,8 @@ public class DetailActivity extends AppCompatActivity {
                             }
                         }).create().show();
                         break;
+
+                    //Return to home
                     case R.id.up:
                         finish();
                         break;
@@ -99,16 +104,5 @@ public class DetailActivity extends AppCompatActivity {
 
         mDetailFloatingActionBar = (FloatingActionButton) findViewById(R.id.detail_fab);
         mDetailFloatingActionBar.setOnClickListener(onClickListener);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.up:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

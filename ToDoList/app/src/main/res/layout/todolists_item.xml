@@ -6,8 +6,8 @@
     android:layout_marginBottom="7dp"
     android:id="@+id/item_layout">
     <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:id="@+id/removeImage"
         android:layout_alignParentLeft="true"
         android:src="@drawable/ic_removed"

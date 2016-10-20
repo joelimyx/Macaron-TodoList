@@ -39,7 +39,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final TodoListHolder holder,  int position) {
+    public void onBindViewHolder(final TodoListHolder holder, final int position) {
         final String name = TodoLists.getInstance().getmNameList().get(position);
 
         holder.mTextView.setText(name);
@@ -62,7 +62,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
                                     @Override
                                     public void onClick(View v) {
                                         Snackbar undo = Snackbar.make(mMain , name+" is restored", Snackbar.LENGTH_LONG);
-                                        TodoLists.getInstance().restoreList(name,temp,holder.getAdapterPosition());
+                                        TodoLists.getInstance().restoreList(name,temp,position);
                                         notifyItemInserted(holder.getAdapterPosition());
                                         undo.show();
                                     }

@@ -36,7 +36,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final DetailViewHolder holder, int position) {
+    public void onBindViewHolder(final DetailViewHolder holder, final int position) {
         final DetailItem item = mDetailList.get(position);
 
         holder.mTitleText.setText(item.getTitle());
@@ -67,8 +67,8 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                                     @Override
                                     public void onClick(View v) {
                                         Snackbar undo = Snackbar.make(v , item.getTitle()+" is restored", Snackbar.LENGTH_LONG);
-                                        mDetailList.add(holder.getAdapterPosition(),item);
-                                        notifyDataSetChanged();
+                                        mDetailList.add(position,item);
+                                        notifyItemInserted(holder.getAdapterPosition());
                                         undo.show();
                                     }
                                 });
@@ -91,6 +91,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                         View view = mContext.getLayoutInflater().inflate(R.layout.detail_dialog,null);
 
+                        //Retrieve and input it to
                         final String title = holder.mTitleText.getText().toString();
                         final String detail = holder.mDetailText.getText().toString();
 
@@ -100,7 +101,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                         mTitleEdit.setText(title);
                         mDetailEdit.setText(detail);
 
-                        dialog.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                        dialog.setView(view).setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 

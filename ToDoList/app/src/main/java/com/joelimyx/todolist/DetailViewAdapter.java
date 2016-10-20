@@ -38,7 +38,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                 switch (v.getId()){
                     case R.id.detail_remove:
                         mDetailList.remove(position);
-                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
                         break;
                 }
             }

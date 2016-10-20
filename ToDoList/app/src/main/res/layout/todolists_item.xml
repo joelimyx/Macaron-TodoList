@@ -10,13 +10,19 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:id="@+id/lists_text"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_centerVertical="true"/>
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:id="@+id/removeImage"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_removed"
         android:layout_centerVertical="true"/>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3"
+        android:layout_below="@id/lists_text"
+        android:layout_marginTop="7dp"/>
 </RelativeLayout>

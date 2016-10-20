@@ -20,11 +20,17 @@
         android:layout_below="@id/title_text"
         android:layout_marginRight="30dp"/>
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:src="@drawable/ic_removed"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:id="@+id/detail_remove"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3"
+        android:layout_below="@id/detail_text"
+        android:layout_marginTop="7dp"/>
 
 </RelativeLayout>

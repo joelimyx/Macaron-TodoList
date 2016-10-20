@@ -5,32 +5,35 @@
               android:id="@+id/detail_item"
               android:layout_marginTop="7dp"
               android:layout_marginBottom="7dp">
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_removed"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/detail_remove"
+        android:layout_margin="5dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title_text"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@id/detail_remove"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detail_text"
         android:textSize="16sp"
         android:layout_below="@id/title_text"
-        android:layout_marginRight="30dp"/>
-    <ImageView
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:src="@drawable/ic_removed"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/detail_remove"/>
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@id/detail_remove"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#D3D3D3"
-        android:layout_below="@id/detail_text"
+        android:layout_above="@id/title_text"
         android:layout_marginTop="7dp"/>
 
 </RelativeLayout>

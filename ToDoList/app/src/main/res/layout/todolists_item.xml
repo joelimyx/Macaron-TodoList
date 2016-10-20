@@ -5,19 +5,29 @@
     android:layout_marginTop="7dp"
     android:layout_marginBottom="7dp"
     android:id="@+id/item_layout">
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:id="@+id/removeImage"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_removed"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:id="@+id/lists_text"
         android:textSize="20sp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/removeImage"
+        android:layout_marginLeft="10dp"/>
     <ImageView
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:id="@+id/removeImage"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_removed"
+        android:src="@drawable/ic_navigate_next"
         android:layout_centerVertical="true"/>
     <ImageView
         android:layout_width="match_parent"

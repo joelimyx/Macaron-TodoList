@@ -36,8 +36,13 @@ public class TodoLists {
     public static HashMap<String, LinkedList<DetailItem>> getMap() {
         return mDetailList;
     }
-    public void removeDetailListByPosition(int pos){
-        mDetailList.remove(mNameList.get(pos));
+    public LinkedList<DetailItem> removeDetailListByPosition(int pos){
+        LinkedList<DetailItem> temp = mDetailList.remove(mNameList.get(pos));
         mNameList.remove(pos);
+        return temp;
+    }
+    public void restoreList(String name, LinkedList<DetailItem> restore, int pos){
+        mNameList.add(pos,name);
+        mDetailList.put(name, restore);
     }
 }

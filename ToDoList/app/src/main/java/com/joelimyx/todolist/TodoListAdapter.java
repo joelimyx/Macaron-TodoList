@@ -2,6 +2,8 @@ package com.joelimyx.todolist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +23,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     HashMap<String,LinkedList<DetailItem>> mToDoLists;
     final Intent myIntent = new Intent();
     final Context mContext;
+    final CoordinatorLayout mMain;
 
-    public TodoListAdapter(HashMap<String,LinkedList<DetailItem>> toDoLists, Context context) {
+    public TodoListAdapter(HashMap<String,LinkedList<DetailItem>> toDoLists, Context context, CoordinatorLayout v) {
         mToDoLists = toDoLists;
         mContext=context;
         myIntent.setClass(context,DetailActivity.class);
+        mMain = v;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(TodoListHolder holder, final int position) {
+    public void onBindViewHolder(final TodoListHolder holder, final int position) {
         final String name = TodoLists.getInstance().getmNameList().get(position);
 
         holder.mTextView.setText(name);
@@ -43,12 +47,30 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
+
                     //Remove the Detail list if the remove icon is clicked
                     case R.id.removeImage:
-                        Log.d("remove", "position: "+position+" length: "+TodoLists.getInstance().getmNameList().size());
-                        TodoLists.getInstance().removeDetailListByPosition(position);
+                        final LinkedList<DetailItem> temp = TodoLists.getInstance().removeDetailListByPosition(position);
                         notifyDataSetChanged();
+
+                        //Snackbar
+                        Snackbar snackbar = Snackbar
+                                .make(mMain, name+" is deleted.", Snackbar.LENGTH_LONG)
+
+                                //Restore
+                                .setAction("Undo", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Snackbar undo = Snackbar.make(mMain , name+" is restored", Snackbar.LENGTH_LONG);
+                                        TodoLists.getInstance().restoreList(name,temp,position);
+                                        notifyDataSetChanged();
+                                        undo.show();
+                                    }
+                                });
+
+                        snackbar.show();
                         break;
+
                     //Create new activity containing the related detail list
                     case R.id.item_layout:
                         myIntent.putExtra("detailListName",name);

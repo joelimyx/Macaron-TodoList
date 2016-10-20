@@ -1,5 +1,6 @@
 package com.joelimyx.todolist;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,21 +45,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Inflate todolist_dialog xml
-                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-                View dialog = inflater.inflate(R.layout.todolist_dialog,null);
+                View view = inflater.inflate(R.layout.todolist_dialog,null);
 
-                mDialogEdit = (EditText) dialog.findViewById(R.id.dialog_edit);
+                mDialogEdit = (EditText) view.findViewById(R.id.dialog_edit);
+                if(mDialogEdit.requestFocus()) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(mDialogEdit, InputMethodManager.SHOW_IMPLICIT);
+                }
 
                 //Create the dialog and show
-                builder.setView(dialog)
+                dialog.setView(view)
                         //Set the positive Button to add list
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String name = mDialogEdit.getText().toString();
-                                mTodoLists.createListByName(name);
-                                todoListAdapter.notifyDataSetChanged();
+                                if (name.isEmpty()){
+                                    Toast.makeText(MainActivity.this, "Field cannot be empty", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    mTodoLists.createListByName(name);
+                                    todoListAdapter.notifyDataSetChanged();
+                                }
                             }
                         })
                         //Set the Negative Button

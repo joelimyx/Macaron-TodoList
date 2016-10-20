@@ -3,20 +3,22 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/detail_item"
-              android:layout_marginTop="10dp"
-              android:layout_marginBottom="10dp">
+              android:layout_marginTop="7dp"
+              android:layout_marginBottom="7dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title_text"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginRight="30dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detail_text"
         android:textSize="16sp"
-        android:layout_below="@id/title_text"/>
+        android:layout_below="@id/title_text"
+        android:layout_marginRight="30dp"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"

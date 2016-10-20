@@ -2,20 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="7dp"
     android:id="@+id/item_layout">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
         android:id="@+id/lists_text"
-        android:textSize="23sp"/>
+        android:textSize="20sp"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/removeImage"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_removed"
-        />
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

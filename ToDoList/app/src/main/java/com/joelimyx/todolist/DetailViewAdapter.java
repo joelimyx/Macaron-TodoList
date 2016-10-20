@@ -41,7 +41,6 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                         notifyItemRemoved(position);
                         break;
                 }
-
             }
         };
         holder.mDetailRemove.setOnClickListener(onClickListener);

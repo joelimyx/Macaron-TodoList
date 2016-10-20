@@ -8,10 +8,10 @@ public class DetailItem {
     private String mTitle, mDetail;
     private boolean isDone;
 
-    public DetailItem(String title, String detail, boolean isDone) {
+    public DetailItem(String title, String detail) {
         mTitle = title;
         mDetail = detail;
-        this.isDone = isDone;
+        isDone = false;
     }
 
     public String getTitle() {

@@ -51,8 +51,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
                         break;
                     //Create new activity containing the related detail list
                     case R.id.item_layout:
-                        Toast.makeText(mContext, "Hey", Toast.LENGTH_SHORT).show();
-                        myIntent.putExtra("detailList",mToDoLists.get(name));
+                        myIntent.putExtra("detailListName",name);
                         mContext.startActivity(myIntent);
                         break;
                 }

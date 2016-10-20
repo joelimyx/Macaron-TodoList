@@ -27,7 +27,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(DetailViewHolder holder, final int position) {
+    public void onBindViewHolder(final DetailViewHolder holder, final int position) {
         final DetailItem item = mDetailList.get(position);
 
         holder.mTitleText.setText(item.getTitle());
@@ -58,6 +58,9 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                                 });
 
                         snackbar.show();
+                        break;
+                    case R.id.detail_item:
+                        holder.mDoneImage.setVisibility(View.VISIBLE);
                         break;
                 }
             }

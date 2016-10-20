@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class DetailViewHolder extends RecyclerView.ViewHolder{
     TextView mTitleText, mDetailText;
-    ImageView mDetailRemove;
+    ImageView mDetailRemove, mDoneImage;
     RelativeLayout mDetailRelative;
 
     public DetailViewHolder(View itemView) {
@@ -21,6 +21,7 @@ public class DetailViewHolder extends RecyclerView.ViewHolder{
 
         mTitleText = (TextView) itemView.findViewById(R.id.title_text);
         mDetailText = (TextView) itemView.findViewById(R.id.detail_text);
+        mDoneImage = (ImageView) itemView.findViewById(R.id.done_image);
         mDetailRemove = (ImageView) itemView.findViewById(R.id.detail_remove);
         mDetailRelative = (RelativeLayout) itemView.findViewById(R.id.detail_item);
     }

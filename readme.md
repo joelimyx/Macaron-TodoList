@@ -24,6 +24,7 @@ Before I started anything, I drew some prototype as to how my Todo List would wo
 You can **create** new List and add item to them individually!
 <p align="center">
 <img src="screenshots/Screenshot_20161020-223120.png" width=250>
+<img src="screenshots/Screenshot_20161021-123349.png" width=250>
 <img src="screenshots/Screenshot_20161020-222320.png" width=250>
 </p>
 
@@ -47,9 +48,15 @@ Wrote the wrong title or missed some detial in your item? You can **Edit** them!
 
 ###Title or Name won't be empty
 Want to make the list name or title empty? WELP sorry, I made it to not add on if **EMPTY**.
+<p align="center">
+<img src="Screenshot_20161021-122624.png" width=250>
+</p>
 
 ###Mark Done
 Finally got your item or got it done? You can **mark it as done** by just pressing on the item.
+<p align="center">
+<img src="Screenshot_20161021-123108.png" width=250>
+</p>
 
 ##Not included / statisfied
 ###Data persistence 

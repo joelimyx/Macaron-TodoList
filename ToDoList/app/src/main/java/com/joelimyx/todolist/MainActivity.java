@@ -1,9 +1,7 @@
 package com.joelimyx.todolist;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,35 +42,53 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Inflate todolist_dialog xml
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
                 View view = inflater.inflate(R.layout.todolist_dialog,null);
 
                 mDialogEdit = (EditText) view.findViewById(R.id.dialog_edit);
 
                 //Create the dialog and show
-                dialog.setView(view);
-                        //Set the positive Button to add list
-                dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                builder.setView(view);
+                        //Set the positive and negative Button to add list
+                builder.setPositiveButton("Add", null).setNegativeButton("Cancel",null);
+
+                final AlertDialog dialog = builder.create();
+
+
+                DialogInterface.OnShowListener onShowListener = new DialogInterface.OnShowListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String name = mDialogEdit.getText().toString();
-                        if (name.isEmpty()){
-                            Toast.makeText(MainActivity.this, "Field cannot be empty", Toast.LENGTH_SHORT).show();
-                        }else {
-                            mTodoLists.createListByName(name);
-                            todoListAdapter.notifyDataSetChanged();
-                        }
+                    public void onShow(DialogInterface d) {
+                        //Set positive
+                        dialog.getButton(Dialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String name = mDialogEdit.getText().toString();
+                                if (name.isEmpty()){
+                                    mDialogEdit.setError("Field cannot be empty");
+                                }else {
+                                    mTodoLists.createListByName(name);
+                                    todoListAdapter.notifyDataSetChanged();
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+
+                        //Set Negative
+                        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
                     }
-                })
-                //Set the Negative Button
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                dialog.create().show();
+                };
+                dialog.setOnShowListener(onShowListener);
+                dialog.show();
             }
+
         });
+
     }
 }

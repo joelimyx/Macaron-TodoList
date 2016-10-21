@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
                     case R.id.detail_fab:
 
                         //Inflate dialog
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(DetailActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
                         View view = getLayoutInflater().inflate(R.layout.detail_dialog, null);
 
                         //Edit Text Reference
@@ -71,26 +71,42 @@ public class DetailActivity extends AppCompatActivity {
                         final EditText mDetailEdit = (EditText) view.findViewById(R.id.detail_edit);
 
                         //Create dialog and show
-                        dialog.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        builder.setPositiveButton("Add",null).setNegativeButton("Cancel", null);
+                        builder.setView(view);
 
-                                String title = mTitleEdit.getText().toString();
-                                String detail = mDetailEdit.getText().toString();
-                                //Check if either field is empty
-                                if (title.isEmpty()) {
-                                    Toast.makeText(DetailActivity.this, "Title can't be blank", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    detailList.add(new DetailItem(title, detail));
-                                    detailViewAdapter.notifyItemInserted(detailList.size() - 1);
-                                }
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        final AlertDialog dialog = builder.create();
+                        DialogInterface.OnShowListener onShowListener = new DialogInterface.OnShowListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
+                            public void onShow(DialogInterface d) {
+
+                                //Set Positive to persist
+                                dialog.getButton(dialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            String title = mTitleEdit.getText().toString();
+                                            String detail = mDetailEdit.getText().toString();
+                                            //Check if either field is empty
+                                            if (title.isEmpty()) {
+                                                mTitleEdit.setError("Field cannot be blank.");
+                                            } else {
+                                                detailList.add(new DetailItem(title, detail));
+                                                detailViewAdapter.notifyItemInserted(detailList.size() - 1);
+                                                dialog.dismiss();
+                                            }
+                                        }
+                                        });
+
+                                //Set negative
+                                dialog.getButton(dialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                     dialog.dismiss();
+                                    }
+                                });
                             }
-                        }).create().show();
+                        };
+                        dialog.setOnShowListener(onShowListener);
+                        dialog.show();
                         break;
 
                     //Return to home
@@ -99,6 +115,7 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
             }
+
         };
 
         mDetailFloatingActionBar = (FloatingActionButton) findViewById(R.id.detail_fab);

@@ -87,7 +87,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                     case R.id.edit_image:
 
                         //Inflate dialog
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         View view = mContext.getLayoutInflater().inflate(R.layout.detail_dialog,null);
 
                         //Retrieve and input it to
@@ -100,39 +100,65 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                         mTitleEdit.setText(title);
                         mDetailEdit.setText(detail);
 
-                        dialog.setView(view).setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
+                        builder.setView(view).setPositiveButton("Update", null).setNegativeButton("Cancel", null);
+                        final AlertDialog dialog = builder.create();
                                 String titletemp = mTitleEdit.getText().toString();
                                 String detailtemp = mDetailEdit.getText().toString();
-
-                                //Check if either field is empty
-                                if (titletemp.isEmpty()) {
-                                    Toast.makeText(mContext, "Title can't be blank", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    item.setTitle(titletemp);
-                                    item.setDetail(detailtemp);
-                                    notifyItemChanged(holder.getAdapterPosition());
-                                }
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        /*********************
+                         *
+                         * OnShowListener
+                         ***********************/
+                        DialogInterface.OnShowListener onShowListener = new DialogInterface.OnShowListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
+                            public void onShow(DialogInterface d) {
+
+                                //Set Positive
+                                dialog.getButton(dialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String titletemp = mTitleEdit.getText().toString();
+                                        String detailtemp = mDetailEdit.getText().toString();
+
+                                        //Check if either field is empty
+                                        if (titletemp.isEmpty()) {
+                                            mTitleEdit.setError("Field cannot be empty.");
+                                        }else{
+                                            item.setTitle(titletemp);
+                                            item.setDetail(detailtemp);
+                                            notifyItemChanged(holder.getAdapterPosition());
+                                            dialog.dismiss();
+                                        }//if
+                                    }
+                                });
+
+                                //Set Negative
+                                dialog.getButton(dialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
                             }
-                        }).create().show();
+                        };
+
+                        dialog.setOnShowListener(onShowListener);
+                        dialog.show();
                         break;
+                    /****************************************
+                     * End of on show
+                     ****************************************/
                 }
             }
         };
+
         holder.mEditImage.setOnClickListener(onClickListener);
         holder.mDetailRelative.setOnClickListener(onClickListener);
         holder.mDetailRemove.setOnClickListener(onClickListener);
-    }
+        }
 
     @Override
     public int getItemCount() {
         return mDetailList.size();
     }
-}
+    }
+

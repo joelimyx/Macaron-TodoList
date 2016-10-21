@@ -2,7 +2,6 @@ package com.joelimyx.todolist;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,13 +20,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
     HashMap<String,LinkedList<DetailItem>> mToDoLists;
     final Intent myIntent = new Intent();
     final Context mContext;
-    final CoordinatorLayout mMain;
 
-    public TodoListAdapter(HashMap<String,LinkedList<DetailItem>> toDoLists, Context context, CoordinatorLayout v) {
+    public TodoListAdapter(HashMap<String,LinkedList<DetailItem>> toDoLists, Context context) {
         mToDoLists = toDoLists;
         mContext=context;
         myIntent.setClass(context,DetailActivity.class);
-        mMain = v;
     }
 
     @Override
@@ -53,13 +50,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
 
                         //Snackbar
                         Snackbar snackbar = Snackbar
-                                .make(mMain, name+" is deleted.", Snackbar.LENGTH_LONG)
+                                .make(v, name+" is deleted.", Snackbar.LENGTH_LONG)
 
                                 //Restore
                                 .setAction("Undo", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Snackbar undo = Snackbar.make(mMain , name+" is restored", Snackbar.LENGTH_LONG);
+                                        Snackbar undo = Snackbar.make(v , name+" is restored", Snackbar.LENGTH_LONG);
                                         TodoLists.getInstance().restoreList(name, temp, position);
                                         notifyItemInserted(position);
                                         undo.show();

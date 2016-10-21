@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     TodoLists mTodoLists;
     FloatingActionButton mTodoFloatingActionButton;
     EditText mDialogEdit;
-    CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +30,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.todo_list);
 
         mTodoLists = TodoLists.getInstance();
-//
-//        //Shared Preference
-//        SharedPreferences mPref = this.getSharedPreferences("pref",MODE_PRIVATE);
-//        final SharedPreferences.Editor presEdit = mPref.edit();
-//        Gson gson = new Gson();
-//
-//        String restored = mPref.getString("data", "");
-//
-//        if (restored.isEmpty()) {
-//            mTodoLists.retrieveData(gson.fromJson(restored, TodoLists.class));
-//        }
-//        else {
-//            presEdit.clear();
-//            String data = gson.toJson(mTodoLists);
-//            presEdit.putString("data", data);
-//        }
-//        presEdit.apply();
 
         //Reference
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mTodoFloatingActionButton = (FloatingActionButton) findViewById(R.id.todo_fab);
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_main);
 
         //Recycler View
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        final TodoListAdapter todoListAdapter =new TodoListAdapter(mTodoLists.getMap(),this,mCoordinatorLayout);
+        final TodoListAdapter todoListAdapter =new TodoListAdapter(mTodoLists.getMap(),this);
         mRecyclerView.setAdapter(todoListAdapter);
 
         //FAB On Click Listener to create dialog

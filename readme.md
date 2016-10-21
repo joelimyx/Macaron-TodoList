@@ -22,10 +22,24 @@ You can **create** new List and add item to them individually!
 If you don't want to deal with your ToDo List, you can just **remove** it!
 
 ###Restore
-Oops, accidentaly delete a list or item? You can **restore** it! If you can press the button in time
+Oops, accidentaly delete a list or item? You can **restore** it! If you can press the button in time.
 
 ###Rename 
 Wrote the wrong title or missed some detial in your item? You can **Edit** them!
+<img src="screenshots/Screenshot_20161020-222325.png" width=250>
+
+###Title or Name won't be empty
+Want to make the list name or title empty? WELP sorry, I made it to not add on if **EMPTY**.
 
 ###Mark Done
 Finally got your item or got it done? You can **mark it as done** by just pressing on the item.
+
+##Not included / statisfied
+###Data persistence 
+I couldn't get the app to store data. I've tried shared preference, but the object just would not store the data.
+
+###Detail and title alignment 
+The title looks offset when the detail text is empty
+
+###Button alignment 
+This is still a work in progress. Things aren't exactly in position or seems offset.

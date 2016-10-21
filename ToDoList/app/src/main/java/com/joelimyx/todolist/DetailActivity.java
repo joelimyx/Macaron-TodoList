@@ -14,15 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.LinkedList;
 
 public class DetailActivity extends AppCompatActivity {
     RecyclerView mDetailRecycler;
     FloatingActionButton mDetailFloatingActionBar;
-    TextView mListName;
-    ImageView mBackButton;
+    TextView mListName,mDetailWelcome;
+    ImageView mBackButton, mDetailArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +36,21 @@ public class DetailActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowCustomEnabled(true); // enable overriding the default toolbar layout
         ab.setDisplayShowTitleEnabled(false);
+        //Reference
+        mDetailWelcome = (TextView) findViewById(R.id.detail_welcome);
         mBackButton = (ImageView) findViewById(R.id.up);
+        mDetailArrow = (ImageView) findViewById(R.id.detail_arrow);
 
+        //Intent
         Intent detailIntent = getIntent();
         String name = detailIntent.getStringExtra("detailListName");
         final LinkedList<DetailItem> detailList = TodoLists.getInstance().getDetailListByName(name);
+
+        //Show text if empty
+        if (detailList.isEmpty()){
+            mDetailArrow.setVisibility(View.VISIBLE);
+            mDetailWelcome.setVisibility(View.VISIBLE);
+        }
 
         //Toolbar Title name
         mListName = (TextView) findViewById(R.id.detail_toolbar);
@@ -91,6 +100,8 @@ public class DetailActivity extends AppCompatActivity {
                                             } else {
                                                 detailList.add(new DetailItem(title, detail));
                                                 detailViewAdapter.notifyItemInserted(detailList.size() - 1);
+                                                mDetailArrow.setVisibility(View.GONE);
+                                                mDetailWelcome.setVisibility(View.GONE);
                                                 dialog.dismiss();
                                             }
                                         }

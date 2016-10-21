@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     TodoLists mTodoLists;
     FloatingActionButton mTodoFloatingActionButton;
     EditText mDialogEdit;
+    TextView mWelcome;
+    ImageView mMainArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         //Reference
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mTodoFloatingActionButton = (FloatingActionButton) findViewById(R.id.todo_fab);
+
+        mWelcome = (TextView) findViewById(R.id.welcome_text);
+        mMainArrow = (ImageView) findViewById(R.id.main_arrow);
+
+        if (mTodoLists.getmNameList().isEmpty()){
+            mWelcome.setVisibility(View.VISIBLE);
+            mMainArrow.setVisibility(View.VISIBLE);
+        }
 
         //Recycler View
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -69,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
                                     mDialogEdit.setError("Field cannot be empty");
                                 }else {
                                     mTodoLists.createListByName(name);
-                                    todoListAdapter.notifyDataSetChanged();
+                                    todoListAdapter.notifyItemInserted(mTodoLists.getmNameList().size());
+                                    mWelcome.setVisibility(View.GONE);
+                                    mMainArrow.setVisibility(View.GONE);
                                     dialog.dismiss();
                                 }
                             }

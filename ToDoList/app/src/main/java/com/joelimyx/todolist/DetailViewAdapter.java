@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.LinkedList;
-import java.util.zip.Inflater;
 
 /**
  * Created by Joe on 10/19/16.
@@ -68,7 +67,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewHolder> {
                                     public void onClick(View v) {
                                         Snackbar undo = Snackbar.make(v , item.getTitle()+" is restored", Snackbar.LENGTH_LONG);
                                         mDetailList.add(position,item);
-                                        notifyItemInserted(holder.getAdapterPosition());
+                                        notifyItemInserted(position);
                                         undo.show();
                                     }
                                 });

@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,8 +60,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListHolder> {
                                     @Override
                                     public void onClick(View v) {
                                         Snackbar undo = Snackbar.make(mMain , name+" is restored", Snackbar.LENGTH_LONG);
-                                        TodoLists.getInstance().restoreList(name,temp,position);
-                                        notifyItemInserted(holder.getAdapterPosition());
+                                        TodoLists.getInstance().restoreList(name, temp, position);
+                                        notifyItemInserted(position);
                                         undo.show();
                                     }
                                 });

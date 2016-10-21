@@ -2,6 +2,7 @@ package com.joelimyx.todolist;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -11,12 +12,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.google.gson.Gson;
+
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
@@ -31,6 +31,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.todo_list);
 
         mTodoLists = TodoLists.getInstance();
+//
+//        //Shared Preference
+//        SharedPreferences mPref = this.getSharedPreferences("pref",MODE_PRIVATE);
+//        final SharedPreferences.Editor presEdit = mPref.edit();
+//        Gson gson = new Gson();
+//
+//        String restored = mPref.getString("data", "");
+//
+//        if (restored.isEmpty()) {
+//            mTodoLists.retrieveData(gson.fromJson(restored, TodoLists.class));
+//        }
+//        else {
+//            presEdit.clear();
+//            String data = gson.toJson(mTodoLists);
+//            presEdit.putString("data", data);
+//        }
+//        presEdit.apply();
 
         //Reference
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -54,10 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 View view = inflater.inflate(R.layout.todolist_dialog,null);
 
                 mDialogEdit = (EditText) view.findViewById(R.id.dialog_edit);
-                if(mDialogEdit.requestFocus()) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(mDialogEdit, InputMethodManager.SHOW_IMPLICIT);
-                }
 
                 //Create the dialog and show
                 dialog.setView(view);

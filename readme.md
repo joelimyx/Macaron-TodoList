@@ -31,7 +31,7 @@ You can **create** new List and add item to them individually!
 ### Remove
 If you don't want to deal with your ToDo List, you can just **remove** it!
 <p align="center">
-<img src="screenshots/Screenshot_20161021-120008.png" width 250>
+<img src="screenshots/Screenshot_20161021-120008.png" width=250>
 </p>
 
 ### Restore
